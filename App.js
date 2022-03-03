@@ -1,14 +1,19 @@
 import React, {useState} from 'react';
 import {View, FlatList, Text, Image, StyleSheet} from 'react-native';
+import Header from './components/Header/Header';
 
 const App = () => {
-  return <View style={styles.root}></View>;
+  return (
+    <View style={styles.root}>
+      <Header />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: 'blue',
+    backgroundColor: 'rgba(73, 140, 236, 1)',
   },
 });
 
