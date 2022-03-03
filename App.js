@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, FlatList, Text, Image, StyleSheet} from 'react-native';
 import Header from './components/Header/Header';
+import Info from './components/Info/Info';
 import Main from './components/Main/Main';
 
 const App = () => {
@@ -8,6 +9,7 @@ const App = () => {
     <View style={styles.root}>
       <Header />
       <Main />
+      <Info />
     </View>
   );
 };
