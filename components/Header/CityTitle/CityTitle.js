@@ -12,16 +12,12 @@ const CityTitle = () => {
 export default CityTitle;
 
 const styles = StyleSheet.create({
-  cityTitleView: {
-    paddingLeft: 25,
-    paddingTop: 15,
-  },
+  cityTitleView: {},
   cityTitle: {
     fontFamily: 'Lato',
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: 35,
-    lineHeight: 60,
     color: '#FFFFFF',
   },
 });
