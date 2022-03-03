@@ -11,6 +11,7 @@ const Header = () => {
         <CityTitle />
         <TemperatureSwitch />
       </View>
+      <LocationSwitch />
     </View>
   );
 };
