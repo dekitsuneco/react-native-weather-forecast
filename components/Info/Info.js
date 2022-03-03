@@ -6,12 +6,17 @@ const Info = () => {
   return (
     <View style={styles.infoView}>
       <View style={styles.infoRow}>
-        <InfoItem title="Wind" value="5 m/s, West" isBottomRow={false} />
-        <InfoItem title="Pressure" value="752 mm" isBottomRow={true} />
+        <InfoItem
+          title="Wind"
+          value="5 "
+          scale="m/s, West"
+          isBottomRow={false}
+        />
+        <InfoItem title="Pressure" value="752 " scale="mm" isBottomRow={true} />
       </View>
       <View style={styles.infoRow}>
-        <InfoItem title="Humidity" value="60%" isBottomRow={false} />
-        <InfoItem title="Rain chance" value="10%" isBottomRow={true} />
+        <InfoItem title="Humidity" value="60" scale="%" isBottomRow={false} />
+        <InfoItem title="Rain chance" value="10" scale="%" isBottomRow={true} />
       </View>
     </View>
   );

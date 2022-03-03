@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-const InfoItem = ({title, value, isBottomRow}) => {
+const InfoItem = ({title, value, scale, isBottomRow}) => {
   return (
     <View
       style={
@@ -9,7 +9,10 @@ const InfoItem = ({title, value, isBottomRow}) => {
         isBottomRow ? {...styles.infoItem, marginBottom: 0} : styles.infoItem
       }>
       <Text style={styles.infoTitle}>{title}</Text>
-      <Text style={styles.infoValue}>{value}</Text>
+      <Text>
+        <Text style={styles.infoValue}>{value}</Text>
+        <Text style={styles.infoValueScale}>{scale}</Text>
+      </Text>
     </View>
   );
 };
@@ -25,5 +28,13 @@ const styles = StyleSheet.create({
     opacity: 0.5,
     color: 'white',
   },
-  infoValue: {},
+  infoValue: {
+    fontSize: 23,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  infoValueScale: {
+    fontSize: 23,
+    color: 'white',
+  },
 });
