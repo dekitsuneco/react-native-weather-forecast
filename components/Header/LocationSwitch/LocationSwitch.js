@@ -23,17 +23,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 25,
   },
-  locationCityView: {
-
-  },
+  locationCityView: {},
   locationCity: {
     color: 'rgba(255, 255, 255, 1)',
     fontSize: 23,
     opacity: 0.5,
   },
-  locationCurrentView: {
-
-  },
+  locationCurrentView: {},
   locationCurrent: {
     color: 'rgba(255, 255, 255, 1)',
     fontSize: 23,

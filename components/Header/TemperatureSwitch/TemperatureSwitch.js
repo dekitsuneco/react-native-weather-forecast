@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   temperatureCelsius: {
     paddingHorizontal: 15,
-    color: 'rgba(255, 255, 255)',
+    color: 'rgba(255, 255, 255, 1)',
     backgroundColor: 'rgba(255, 255, 255, 0.3)',
     borderTopLeftRadius: 8,
     borderBottomLeftRadius: 8,

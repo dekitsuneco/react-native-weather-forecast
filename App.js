@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import {View, FlatList, Text, Image, StyleSheet} from 'react-native';
 import Header from './components/Header/Header';
+import Main from './components/Main/Main';
 
 const App = () => {
   return (
     <View style={styles.root}>
       <Header />
+      <Main />
     </View>
   );
 };
