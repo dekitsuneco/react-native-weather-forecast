@@ -8,18 +8,52 @@ import {
 import React, {useState} from 'react';
 
 const SettingsBlock = () => {
-  const [isChangingCity, setIsChangingCity] = useState(false);
+  const [isChangingCity, setIsChangingCity] = useState(true);
   const [inputValue, setInputValue] = useState('');
-  const [city, setCity] = useState('');
+  const [city, setCity] = useState('Moscow');
+
+  const [isCelcius, setIsCelcius] = useState(true);
 
   const handleSubmit = () => {
     setCity(inputValue);
     setIsChangingCity(true);
   };
 
-  const handlePress = () => {
+  const handleCityPress = () => {
     setIsChangingCity(false);
   };
+
+  const handleTempPress = () => {
+    setIsCelcius(!isCelcius);
+  };
+
+  const tempSwitch = isCelcius ? (
+    <View style={styles.tempSwitch}>
+      <TouchableOpacity onPress={handleTempPress}>
+        <View style={{...styles.tempCelsius, ...styles.tempActive}}>
+          <Text style={styles.active}>C</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleTempPress}>
+        <View style={{...styles.tempFahrenheit, ...styles.tempDisabled}}>
+          <Text style={styles.disabled}>F</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  ) : (
+    <View style={styles.tempSwitch}>
+      <TouchableOpacity onPress={handleTempPress}>
+        <View style={{...styles.tempCelsius, ...styles.tempDisabled}}>
+          <Text style={styles.disabled}>C</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleTempPress}>
+        <View style={{...styles.tempFahrenheit, ...styles.tempActive}}>
+          <Text style={styles.active}>F</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
 
   const cityChange = (
     <TextInput
@@ -42,21 +76,14 @@ const SettingsBlock = () => {
         <View style={styles.tempSign}>
           <Text style={styles.sign}>º</Text>
         </View>
-        <View style={styles.tempSwitch}>
-          <View style={styles.tempCelsius}>
-            <Text style={styles.celsius}>C</Text>
-          </View>
-          <View style={styles.temperatureFahrenheit}>
-            <Text style={styles.fahrenheit}>F</Text>
-          </View>
-        </View>
+        {tempSwitch}
       </View>
     </View>
   );
   const bottomRow = (
     <View key="2" style={styles.bottomRow}>
       <View style={styles.setLocationCity}>
-        <TouchableOpacity onPress={handlePress}>
+        <TouchableOpacity onPress={handleCityPress}>
           <Text style={styles.locationCity}>Change city</Text>
         </TouchableOpacity>
       </View>
@@ -123,20 +150,27 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 7,
     borderBottomLeftRadius: 7,
   },
-  celsius: {
+  tempActive: {
+    backgroundColor: 'rgba(255, 255, 255, .4)',
+  },
+  active: {
     color: 'rgba(255, 255, 255, 1)',
     fontSize: 18,
     fontWeight: 'bold',
   },
-  temperatureFahrenheit: {
+  tempFahrenheit: {
     paddingHorizontal: 14,
+    borderTopRightRadius: 7,
+    borderBottomRightRadius: 7,
   },
-  fahrenheit: {
+  tempDisabled: {
+    backgroundColor: 'rgba(255, 255, 255, 0)',
+  },
+  disabled: {
     color: 'white',
     opacity: 0.4,
     fontSize: 18,
     fontWeight: 'bold',
-    borderRadius: 7,
   },
   bottomRow: {
     flexDirection: 'row',
