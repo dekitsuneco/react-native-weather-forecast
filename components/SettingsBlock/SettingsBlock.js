@@ -102,11 +102,11 @@ const styles = StyleSheet.create({
   setLocationCity: {},
   locationCity: {
     color: 'rgba(255, 255, 255, .6)',
-    fontSize: 18,
+    fontSize: 15,
   },
   setLocationCurrent: {},
   locationCurrent: {
     color: 'rgba(255, 255, 255, .6)',
-    fontSize: 18,
+    fontSize: 15,
   },
 });
