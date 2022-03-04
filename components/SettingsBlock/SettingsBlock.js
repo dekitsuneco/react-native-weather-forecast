@@ -7,11 +7,11 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 
-const SettingsBlock = ({setTemp, toCelcius, toFahrenheit}) => {
+const SettingsBlock = ({city, setCity, setTemp, toCelcius, toFahrenheit}) => {
   // States:
   const [isChangingCity, setIsChangingCity] = useState(true);
   const [inputValue, setInputValue] = useState('');
-  const [city, setCity] = useState('Moscow');
+  //const [city, setCity] = useState('Moscow');
 
   const [isCelcius, setIsCelcius] = useState(true);
 

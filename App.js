@@ -14,10 +14,13 @@ const App = () => {
     pressure: 752,
     rainProb: 10,
   };*/
+
   // States:
   const [weatherData, setWeatherData] = useState({});
   const [temp, setTemp] = useState(0);
+  const [city, setCity] = useState('Moscow');
 
+  // Functions:
   const normalizeDataFromAPI = data => {
     const normalizeTemp = temperature => Math.round(temperature - 273.15);
     const normalizeWind = wind => Math.round(wind);
@@ -66,6 +69,7 @@ const App = () => {
           setWeatherData(normalizedWeatherData);
           setTemp(weatherData.temperature);
 
+          //!DEBUGGING
           console.log('________________________');
           console.log(Date.now().toLocaleString());
           console.log(normalizedWeatherData);
@@ -80,19 +84,21 @@ const App = () => {
     };*/
   }, [weatherData.temperature]);
 
-  const {description, status, ...weatherReport} = weatherData;
-
-  // Functions:
   const toCelcius = () => {
     setTemp(Math.round(temp * (9 / 5) + 32));
   };
+
   const toFahrenheit = () => {
     setTemp(Math.round((temp - 32) * (5 / 9)));
   };
 
+  const {temperature, description, status, ...weatherReport} = weatherData;
+
   return (
     <View style={styles.root}>
       <SettingsBlock
+        city={city}
+        setCity={setCity}
         setTemp={setTemp}
         toCelcius={toCelcius}
         toFahrenheit={toFahrenheit}
