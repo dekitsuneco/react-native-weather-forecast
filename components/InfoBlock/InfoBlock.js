@@ -1,11 +1,8 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React from 'react';
-import InfoItem from './InfoItem';
 import InfoCol from './InfoCol';
 
 const InfoBlock = ({weatherReport}) => {
-  //const {wind, humidity, pressure, rainProb} = weatherReport;
-
   const windDataset = {
     title: 'Wind',
     value: weatherReport.wind,
