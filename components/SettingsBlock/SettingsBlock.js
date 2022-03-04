@@ -1,8 +1,5 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
-import CityTitle from '../Header/CityTitle/CityTitle';
-import TemperatureSwitch from '../Header/TemperatureSwitch/TemperatureSwitch';
-import LocationSwitch from '../Header/LocationSwitch/LocationSwitch';
 
 const SettingsBlock = () => {
   return (
