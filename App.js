@@ -60,8 +60,7 @@ const App = () => {
 
   useEffect(() => {
     const fetchWeatherDataFromAPI = () => {
-      const URL =
-        'https://api.openweathermap.org/data/2.5/weather?q=London&appid=bce68de2a52a0351de2783eff7e40797';
+      const URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=bce68de2a52a0351de2783eff7e40797`;
       fetch(URL)
         .then(res => res.json())
         .then(data => {
@@ -82,7 +81,7 @@ const App = () => {
     /*return () => {
       second;
     };*/
-  }, [weatherData.temperature]);
+  }, [weatherData.temperature, city]);
 
   const toCelcius = () => {
     setTemp(Math.round(temp * (9 / 5) + 32));
