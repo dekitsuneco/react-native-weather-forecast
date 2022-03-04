@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-const Main = ({temp}) => {
+const Main = ({temp, description}) => {
   return (
     <View style={styles.widgetBlock}>
       <View style={styles.topRow}>
@@ -14,7 +14,7 @@ const Main = ({temp}) => {
       </View>
       <View style={styles.bottomRow}>
         <View style={styles.weatherDescription}>
-          <Text style={styles.description}>Mostly sunny</Text>
+          <Text style={styles.description}>{description}</Text>
         </View>
       </View>
     </View>

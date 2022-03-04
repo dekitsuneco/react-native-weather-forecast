@@ -1,7 +1,9 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-const InfoBlock = () => {
+const InfoBlock = ({weatherReport}) => {
+  const {wind, humidity, pressure, rainProb} = weatherReport;
+
   return (
     <View style={styles.infoBlock}>
       <View style={styles.leftCol}>
@@ -11,19 +13,19 @@ const InfoBlock = () => {
           </View>
           <View style={styles.infoValue}>
             <Text style={styles.fullValue}>
-              <Text style={styles.value}>5</Text>
-              <Text style={styles.scale}>m/s, West</Text>
+              <Text style={styles.value}>{wind}</Text>
+              <Text style={styles.scale}> m/s, West</Text>
             </Text>
           </View>
         </View>
         <View style={styles.infoItem}>
           <View style={styles.infoTitle}>
-            <Text style={styles.title}>Wind</Text>
+            <Text style={styles.title}>Humidty</Text>
           </View>
           <View style={styles.infoValue}>
             <Text style={styles.fullValue}>
-              <Text style={styles.value}>5</Text>
-              <Text style={styles.scale}>m/s, West</Text>
+              <Text style={styles.value}>{humidity}</Text>
+              <Text style={styles.scale}>%</Text>
             </Text>
           </View>
         </View>
@@ -31,23 +33,23 @@ const InfoBlock = () => {
       <View style={styles.rightCol}>
         <View style={styles.infoItem}>
           <View style={styles.infoTitle}>
-            <Text style={styles.title}>Wind</Text>
+            <Text style={styles.title}>Pressure</Text>
           </View>
           <View style={styles.infoValue}>
             <Text style={styles.fullValue}>
-              <Text style={styles.value}>5</Text>
-              <Text style={styles.scale}>m/s, West</Text>
+              <Text style={styles.value}>{pressure}</Text>
+              <Text style={styles.scale}> mm Hg</Text>
             </Text>
           </View>
         </View>
         <View style={styles.infoItem}>
           <View style={styles.infoTitle}>
-            <Text style={styles.title}>Wind</Text>
+            <Text style={styles.title}>Rain probability</Text>
           </View>
           <View style={styles.infoValue}>
             <Text style={styles.fullValue}>
-              <Text style={styles.value}>5</Text>
-              <Text style={styles.scale}>m/s, West</Text>
+              <Text style={styles.value}>{rainProb}</Text>
+              <Text style={styles.scale}>%</Text>
             </Text>
           </View>
         </View>

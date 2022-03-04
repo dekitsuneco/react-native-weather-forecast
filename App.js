@@ -5,8 +5,21 @@ import WidgetBlock from './components/WidgetBlock/WidgetBlock';
 import InfoBlock from './components/InfoBlock/InfoBlock';
 
 const App = () => {
-  const [temp, setTemp] = useState(20);
+  const weatherData = {
+    temperature: 20,
+    description: 'Mostly sunny',
+    wind: 5,
+    humidity: 60,
+    pressure: 752,
+    rainProb: 10,
+  };
 
+  const {temperature, description, ...weatherReport} = weatherData;
+
+  // States:
+  const [temp, setTemp] = useState(temperature);
+
+  // Functions:
   const toCelcius = () => {
     setTemp(temp * (9 / 5) + 32);
   };
@@ -21,8 +34,8 @@ const App = () => {
         toCelcius={toCelcius}
         toFahrenheit={toFahrenheit}
       />
-      <WidgetBlock temp={temp} />
-      <InfoBlock />
+      <WidgetBlock temp={temp} description={description} />
+      <InfoBlock weatherReport={weatherReport} />
     </View>
   );
 };
