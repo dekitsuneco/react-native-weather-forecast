@@ -1,9 +1,10 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import InfoItem from './InfoItem';
+import InfoCol from './InfoCol';
 
 const InfoBlock = ({weatherReport}) => {
-  const {wind, humidity, pressure, rainProb} = weatherReport;
+  //const {wind, humidity, pressure, rainProb} = weatherReport;
 
   const windDataset = {
     title: 'Wind',
@@ -28,30 +29,8 @@ const InfoBlock = ({weatherReport}) => {
 
   return (
     <View style={styles.infoBlock}>
-      <View style={styles.leftCol}>
-        <InfoItem
-          title={windDataset.title}
-          value={windDataset.value}
-          scale={windDataset.scale}
-        />
-        <InfoItem
-          title={humidityDataset.title}
-          value={humidityDataset.value}
-          scale={humidityDataset.scale}
-        />
-      </View>
-      <View style={styles.rightCol}>
-        <InfoItem
-          title={pressureDataset.title}
-          value={pressureDataset.value}
-          scale={pressureDataset.scale}
-        />
-        <InfoItem
-          title={rainProbDataset.title}
-          value={rainProbDataset.value}
-          scale={rainProbDataset.scale}
-        />
-      </View>
+      <InfoCol datasets={[windDataset, humidityDataset]} />
+      <InfoCol datasets={[pressureDataset, rainProbDataset]} />
     </View>
   );
 };
