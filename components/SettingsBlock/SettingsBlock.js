@@ -1,38 +1,62 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import React, {useState} from 'react';
 
 const SettingsBlock = () => {
+  const isChangingCity = false;
+  const [inputValue, setInputValue] = useState('');
+
+  const cityChange = (
+    <TextInput
+      style={styles.cityChange}
+      placeholder="Type city.."
+      type="text"
+      value={inputValue}
+      onChangeText={textValue => setInputValue(textValue)}
+    />
+  );
+
+  const topRow = (
+    <View key="1" style={styles.topRow}>
+      <View style={styles.cityTitle}>
+        <Text style={styles.city}>Omsk</Text>
+      </View>
+      <View style={styles.tempPanel}>
+        <View style={styles.tempSign}>
+          <Text style={styles.sign}>º</Text>
+        </View>
+        <View style={styles.tempSwitch}>
+          <View style={styles.tempCelsius}>
+            <Text style={styles.celsius}>C</Text>
+          </View>
+          <View style={styles.temperatureFahrenheit}>
+            <Text style={styles.fahrenheit}>F</Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+  const bottomRow = (
+    <View key="2" style={styles.bottomRow}>
+      <View style={styles.setLocationCity}>
+        <TouchableOpacity>
+          <Text style={styles.locationCity}>Change city</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.setLocationCurrent}>
+        <Text style={styles.locationCurrent}>🔺 Current location</Text>
+      </View>
+    </View>
+  );
+
   return (
     <View style={styles.settingsBlock}>
-      <View style={styles.topRow}>
-        <View style={styles.cityTitle}>
-          <Text style={styles.city}>Omsk</Text>
-        </View>
-        <View style={styles.tempPanel}>
-          <View style={styles.tempSign}>
-            <Text style={styles.sign}>º</Text>
-          </View>
-          <View style={styles.tempSwitch}>
-            <View style={styles.tempCelsius}>
-              <Text style={styles.celsius}>C</Text>
-            </View>
-            <View style={styles.temperatureFahrenheit}>
-              <Text style={styles.fahrenheit}>F</Text>
-            </View>
-          </View>
-        </View>
-      </View>
-
-      <View style={styles.bottomRow}>
-        <View style={styles.setLocationCity}>
-          <TouchableOpacity>
-            <Text style={styles.locationCity}>Change city</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.setLocationCurrent}>
-          <Text style={styles.locationCurrent}>🔺 Current location</Text>
-        </View>
-      </View>
+      {isChangingCity ? [topRow, bottomRow] : cityChange}
     </View>
   );
 };
@@ -40,6 +64,13 @@ const SettingsBlock = () => {
 export default SettingsBlock;
 
 const styles = StyleSheet.create({
+  cityChange: {
+    padding: 17,
+    backgroundColor: 'white',
+    color: 'black',
+    fontSize: 15,
+    borderRadius: 4,
+  },
   settingsBlock: {
     marginTop: 19,
     marginHorizontal: 19,
