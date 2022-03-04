@@ -8,13 +8,14 @@ const App = () => {
   const weatherData = {
     temperature: 20,
     description: 'Mostly sunny',
+    status: 'sun',
     wind: 5,
     humidity: 60,
     pressure: 752,
     rainProb: 10,
   };
 
-  const {temperature, description, ...weatherReport} = weatherData;
+  const {temperature, description, status, ...weatherReport} = weatherData;
 
   // States:
   const [temp, setTemp] = useState(temperature);
@@ -34,7 +35,7 @@ const App = () => {
         toCelcius={toCelcius}
         toFahrenheit={toFahrenheit}
       />
-      <WidgetBlock temp={temp} description={description} />
+      <WidgetBlock temp={temp} status={status} description={description} />
       <InfoBlock weatherReport={weatherReport} />
     </View>
   );
