@@ -14,10 +14,12 @@ const App = () => {
     pressure: 752,
     rainProb: 10,
   };*/
+  // States:
   const [weatherData, setWeatherData] = useState({});
+  const [temp, setTemp] = useState(0);
 
   const normalizeDataFromAPI = data => {
-    const normalizeTemp = temp => Math.round(temp - 273.15);
+    const normalizeTemp = temperature => Math.round(temperature - 273.15);
     const normalizeWind = wind => Math.round(wind);
     const normalizeHumidity = humidity => Math.round(humidity);
     const normalizePressure = pressure => Math.round(pressure * 0.75006);
@@ -52,39 +54,40 @@ const App = () => {
       rainProb: normalizeRainProb(10), //TODO
     };
   };
-  const fetchWeatherDataFromAPI = () => {
-    const URL =
-      'https://api.openweathermap.org/data/2.5/weather?q=London&appid=bce68de2a52a0351de2783eff7e40797';
-    fetch(URL)
-      .then(res => res.json())
-      .then(data => {
-        const normalizedWeatherData = normalizeDataFromAPI(data);
-        setWeatherData(normalizedWeatherData);
-
-        console.log(normalizedWeatherData);
-      });
-  };
 
   useEffect(() => {
+    const fetchWeatherDataFromAPI = () => {
+      const URL =
+        'https://api.openweathermap.org/data/2.5/weather?q=London&appid=bce68de2a52a0351de2783eff7e40797';
+      fetch(URL)
+        .then(res => res.json())
+        .then(data => {
+          const normalizedWeatherData = normalizeDataFromAPI(data);
+          setWeatherData(normalizedWeatherData);
+          setTemp(weatherData.temperature);
+
+          console.log('________________________');
+          console.log(Date.now().toLocaleString());
+          console.log(normalizedWeatherData);
+          console.log('*************************');
+        });
+    };
+
     fetchWeatherDataFromAPI();
 
     /*return () => {
       second;
-    };
-  }, [third]);*/
-  });
+    };*/
+  }, [weatherData.temperature]);
 
-  const {temperature, description, status, ...weatherReport} = weatherData;
-
-  // States:
-  const [temp, setTemp] = useState(temperature);
+  const {description, status, ...weatherReport} = weatherData;
 
   // Functions:
   const toCelcius = () => {
-    setTemp(temp * (9 / 5) + 32);
+    setTemp(Math.round(temp * (9 / 5) + 32));
   };
   const toFahrenheit = () => {
-    setTemp((temp - 32) * (5 / 9));
+    setTemp(Math.round((temp - 32) * (5 / 9)));
   };
 
   return (
