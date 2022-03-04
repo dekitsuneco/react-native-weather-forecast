@@ -8,23 +8,35 @@ import {
 import React, {useState} from 'react';
 
 const SettingsBlock = () => {
-  const isChangingCity = false;
+  const [isChangingCity, setIsChangingCity] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [city, setCity] = useState('');
+
+  const handleSubmit = () => {
+    setCity(inputValue);
+    setIsChangingCity(true);
+  };
+
+  const handlePress = () => {
+    setIsChangingCity(false);
+  };
 
   const cityChange = (
     <TextInput
       style={styles.cityChange}
       placeholder="Type city.."
       type="text"
+      defaultValue={city}
       value={inputValue}
       onChangeText={textValue => setInputValue(textValue)}
+      onSubmitEditing={handleSubmit}
     />
   );
 
   const topRow = (
     <View key="1" style={styles.topRow}>
       <View style={styles.cityTitle}>
-        <Text style={styles.city}>Omsk</Text>
+        <Text style={styles.city}>{city}</Text>
       </View>
       <View style={styles.tempPanel}>
         <View style={styles.tempSign}>
@@ -44,7 +56,7 @@ const SettingsBlock = () => {
   const bottomRow = (
     <View key="2" style={styles.bottomRow}>
       <View style={styles.setLocationCity}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handlePress}>
           <Text style={styles.locationCity}>Change city</Text>
         </TouchableOpacity>
       </View>
