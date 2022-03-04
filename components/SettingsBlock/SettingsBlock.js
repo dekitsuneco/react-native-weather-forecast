@@ -5,7 +5,7 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 const SettingsBlock = ({city, setCity, setTemp, toCelcius, toFahrenheit}) => {
   // States:
@@ -33,8 +33,6 @@ const SettingsBlock = ({city, setCity, setTemp, toCelcius, toFahrenheit}) => {
       toFahrenheit();
     }
   };
-
-  // Functions:
 
   // components:
   const tempSwitch = isCelcius ? (
@@ -98,7 +96,9 @@ const SettingsBlock = ({city, setCity, setTemp, toCelcius, toFahrenheit}) => {
         </TouchableOpacity>
       </View>
       <View style={styles.setLocationCurrent}>
-        <Text style={styles.locationCurrent}>🔺 Current location</Text>
+        <TouchableOpacity>
+          <Text style={styles.locationCurrent}>🔺 Current location</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

@@ -1,58 +1,56 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import InfoItem from './InfoItem';
 
 const InfoBlock = ({weatherReport}) => {
   const {wind, humidity, pressure, rainProb} = weatherReport;
 
+  const windDataset = {
+    title: 'Wind',
+    value: weatherReport.wind,
+    scale: ' m/s, West',
+  };
+  const humidityDataset = {
+    title: 'Humidity',
+    value: weatherReport.humidity,
+    scale: '%',
+  };
+  const pressureDataset = {
+    title: 'Pressure',
+    value: weatherReport.pressure,
+    scale: ' mm Hg',
+  };
+  const rainProbDataset = {
+    title: 'Rain Probality',
+    value: weatherReport.rainProb,
+    scale: '%',
+  };
+
   return (
     <View style={styles.infoBlock}>
       <View style={styles.leftCol}>
-        <View style={styles.infoItem}>
-          <View style={styles.infoTitle}>
-            <Text style={styles.title}>Wind</Text>
-          </View>
-          <View style={styles.infoValue}>
-            <Text style={styles.fullValue}>
-              <Text style={styles.value}>{wind}</Text>
-              <Text style={styles.scale}> m/s, West</Text>
-            </Text>
-          </View>
-        </View>
-        <View style={styles.infoItem}>
-          <View style={styles.infoTitle}>
-            <Text style={styles.title}>Humidty</Text>
-          </View>
-          <View style={styles.infoValue}>
-            <Text style={styles.fullValue}>
-              <Text style={styles.value}>{humidity}</Text>
-              <Text style={styles.scale}>%</Text>
-            </Text>
-          </View>
-        </View>
+        <InfoItem
+          title={windDataset.title}
+          value={windDataset.value}
+          scale={windDataset.scale}
+        />
+        <InfoItem
+          title={humidityDataset.title}
+          value={humidityDataset.value}
+          scale={humidityDataset.scale}
+        />
       </View>
       <View style={styles.rightCol}>
-        <View style={styles.infoItem}>
-          <View style={styles.infoTitle}>
-            <Text style={styles.title}>Pressure</Text>
-          </View>
-          <View style={styles.infoValue}>
-            <Text style={styles.fullValue}>
-              <Text style={styles.value}>{pressure}</Text>
-              <Text style={styles.scale}> mm Hg</Text>
-            </Text>
-          </View>
-        </View>
-        <View style={styles.infoItem}>
-          <View style={styles.infoTitle}>
-            <Text style={styles.title}>Rain probability</Text>
-          </View>
-          <View style={styles.infoValue}>
-            <Text style={styles.fullValue}>
-              <Text style={styles.value}>{rainProb}</Text>
-              <Text style={styles.scale}>%</Text>
-            </Text>
-          </View>
-        </View>
+        <InfoItem
+          title={pressureDataset.title}
+          value={pressureDataset.value}
+          scale={pressureDataset.scale}
+        />
+        <InfoItem
+          title={rainProbDataset.title}
+          value={rainProbDataset.value}
+          scale={rainProbDataset.scale}
+        />
       </View>
     </View>
   );
@@ -70,21 +68,4 @@ const styles = StyleSheet.create({
   },
   leftCol: {},
   rightCol: {},
-  infoItem: {
-    marginBottom: 35,
-  },
-  infoTitle: {},
-  title: {
-    color: 'rgba(255, 255, 255, .6)',
-    fontSize: 15,
-  },
-  infoValue: {},
-  fullValue: {
-    color: 'rgba(255, 255, 255, 1)',
-    fontSize: 15,
-  },
-  value: {
-    fontWeight: 'bold',
-  },
-  scale: {},
 });
