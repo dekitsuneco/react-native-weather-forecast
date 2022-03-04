@@ -5,15 +5,15 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
+import TempSwitch from './TempSwitch';
 
 const SettingsBlock = ({city, setCity, setTemp, toCelcius, toFahrenheit}) => {
   // States:
   const [isChangingCity, setIsChangingCity] = useState(true);
   const [inputValue, setInputValue] = useState('');
-  //const [city, setCity] = useState('Moscow');
 
-  const [isCelcius, setIsCelcius] = useState(true);
+  //const [isCelcius, setIsCelcius] = useState(true);
 
   // Event handlers:
   const handleSubmit = () => {
@@ -25,17 +25,17 @@ const SettingsBlock = ({city, setCity, setTemp, toCelcius, toFahrenheit}) => {
     setIsChangingCity(false);
   };
 
-  const handleTempPress = () => {
+  /*const handleTempPress = () => {
     setIsCelcius(!isCelcius);
     if (isCelcius) {
       toCelcius();
     } else {
       toFahrenheit();
     }
-  };
+  };*/
 
-  // components:
-  const tempSwitch = isCelcius ? (
+  // Components:
+  /*const tempSwitch = isCelcius ? (
     <View style={styles.tempSwitch}>
       <TouchableOpacity onPress={handleTempPress}>
         <View style={{...styles.tempCelsius, ...styles.tempActive}}>
@@ -61,6 +61,9 @@ const SettingsBlock = ({city, setCity, setTemp, toCelcius, toFahrenheit}) => {
         </View>
       </TouchableOpacity>
     </View>
+  );*/
+  const tempSwitch = (
+    <TempSwitch toCelcius={toCelcius} toFahrenheit={toFahrenheit} />
   );
 
   const cityChange = (
@@ -147,7 +150,7 @@ const styles = StyleSheet.create({
     opacity: 0.4,
     fontSize: 18,
   },
-  tempSwitch: {
+  /*tempSwitch: {
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
@@ -181,7 +184,7 @@ const styles = StyleSheet.create({
     opacity: 0.4,
     fontSize: 18,
     fontWeight: 'bold',
-  },
+  },*/
   bottomRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',

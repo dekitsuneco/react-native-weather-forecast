@@ -42,6 +42,4 @@ const styles = StyleSheet.create({
     marginHorizontal: 19,
     marginBottom: 19,
   },
-  leftCol: {},
-  rightCol: {},
 });
