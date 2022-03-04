@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-const Main = () => {
+const Main = ({temp}) => {
   return (
     <View style={styles.widgetBlock}>
       <View style={styles.topRow}>
@@ -9,7 +9,7 @@ const Main = () => {
           <Text style={styles.icon}>⛅</Text>
         </View>
         <View style={styles.weatherTemp}>
-          <Text style={styles.temp}>19º</Text>
+          <Text style={styles.temp}>{temp}º</Text>
         </View>
       </View>
       <View style={styles.bottomRow}>

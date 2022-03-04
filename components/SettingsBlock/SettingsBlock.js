@@ -7,13 +7,15 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 
-const SettingsBlock = () => {
+const SettingsBlock = ({setTemp, toCelcius, toFahrenheit}) => {
+  // States:
   const [isChangingCity, setIsChangingCity] = useState(true);
   const [inputValue, setInputValue] = useState('');
   const [city, setCity] = useState('Moscow');
 
   const [isCelcius, setIsCelcius] = useState(true);
 
+  // Event handlers:
   const handleSubmit = () => {
     setCity(inputValue);
     setIsChangingCity(true);
@@ -25,8 +27,16 @@ const SettingsBlock = () => {
 
   const handleTempPress = () => {
     setIsCelcius(!isCelcius);
+    if (isCelcius) {
+      toCelcius();
+    } else {
+      toFahrenheit();
+    }
   };
 
+  // Functions:
+
+  // components:
   const tempSwitch = isCelcius ? (
     <View style={styles.tempSwitch}>
       <TouchableOpacity onPress={handleTempPress}>

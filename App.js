@@ -5,10 +5,23 @@ import WidgetBlock from './components/WidgetBlock/WidgetBlock';
 import InfoBlock from './components/InfoBlock/InfoBlock';
 
 const App = () => {
+  const [temp, setTemp] = useState(20);
+
+  const toCelcius = () => {
+    setTemp(temp * (9 / 5) + 32);
+  };
+  const toFahrenheit = () => {
+    setTemp((temp - 32) * (5 / 9));
+  };
+
   return (
     <View style={styles.root}>
-      <SettingsBlock />
-      <WidgetBlock />
+      <SettingsBlock
+        setTemp={setTemp}
+        toCelcius={toCelcius}
+        toFahrenheit={toFahrenheit}
+      />
+      <WidgetBlock temp={temp} />
       <InfoBlock />
     </View>
   );
