@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
-import {View, FlatList, Text, Image, StyleSheet} from 'react-native';
-import Header from './components/Header/Header';
-import Info from './components/Info/Info';
-import Main from './components/Main/Main';
+import {View, StyleSheet} from 'react-native';
+import SettingsBlock from './components/SettingsBlock/SettingsBlock';
+import WidgetBlock from './components/WidgetBlock/WidgetBlock';
+import InfoBlock from './components/InfoBlock/InfoBlock';
 
 const App = () => {
   return (
     <View style={styles.root}>
-      <Header />
-      <Main />
-      <Info />
+      <SettingsBlock />
+      <WidgetBlock />
+      <InfoBlock />
     </View>
   );
 };
