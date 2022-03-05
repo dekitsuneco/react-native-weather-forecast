@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
 
-const WidgetBlock = ({temp, status, description}) => {
+const WidgetBlock = ({weatherData}) => {
   /*const iconSet = {
     cloud: '☁',
     rain: '🌧',
@@ -25,6 +25,8 @@ const WidgetBlock = ({temp, status, description}) => {
     sun: require('./assets/img/sun.png'),
   };
 
+  const {temperature, status, description} = weatherData;
+
   return (
     <View style={styles.widgetBlock}>
       <View style={styles.topRow}>
@@ -32,7 +34,7 @@ const WidgetBlock = ({temp, status, description}) => {
           <Image style={styles.img} source={icons[status]} />
         </View>
         <View style={styles.weatherTemp}>
-          <Text style={styles.temp}>{temp}º</Text>
+          <Text style={styles.temp}>{temperature}º</Text>
         </View>
       </View>
       <View style={styles.bottomRow}>

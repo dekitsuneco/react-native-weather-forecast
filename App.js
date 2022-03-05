@@ -17,8 +17,6 @@ const App = () => {
 
   // States:
   const [weatherData, setWeatherData] = useState({});
-  const [temp, setTemp] = useState(0);
-  const [city, setCity] = useState('Moscow');
 
   const [requestedCity, setRequestedCity] = useState('Moscow');
 
@@ -50,6 +48,7 @@ const App = () => {
     };
 
     return {
+      city: data.name,
       temperature: normalizeTemp(data.main.temp),
       description: normalizeDescription(data.weather[0].description),
       status: normalizeStatus(data.weather[0].main),
@@ -68,8 +67,8 @@ const App = () => {
         .then(data => {
           const normalizedWeatherData = normalizeDataFromAPI(data);
           setWeatherData(normalizedWeatherData);
-          setTemp(weatherData.temperature);
-          setCity(data.name);
+          //setTemp(weatherData.temperature);
+          //setCity(data.name);
 
           //!DEBUGGING
           console.log('________________________');
@@ -90,28 +89,43 @@ const App = () => {
     };*/
   }, [requestedCity]);
 
-  const toCelcius = () => {
-    setTemp(Math.round(temp * (9 / 5) + 32));
+  const temperatureConverter = {
+    toCelcius: () =>
+      setWeatherData(prev => ({
+        ...prev,
+        temperature: Math.round(prev.temperature * (9 / 5) + 32),
+      })),
+    toFahrenheit: () =>
+      setWeatherData(prev => ({
+        ...prev,
+        temperature: Math.round((prev.temperature - 32) * (5 / 9)),
+      })),
+  };
+  /*const toCelcius = () => {
+    setWeatherData(prev => ({
+      ...prev,
+      temperature: Math.round(prev.temperature * (9 / 5) + 32),
+    }));
   };
 
   const toFahrenheit = () => {
-    setTemp(Math.round((temp - 32) * (5 / 9)));
-  };
+    setWeatherData(prev => ({
+      ...prev,
+      temperature: Math.round((prev.temperature - 32) * (5 / 9)),
+    }));
+  };*/
 
-  const {temperature, description, status, ...weatherReport} = weatherData;
+  //const {temperature, description, status, ...weatherReport} = weatherData;
 
   return (
     <View style={styles.root}>
       <SettingsBlock
-        city={city}
-        setCity={setCity}
-        setTemp={setTemp}
-        toCelcius={toCelcius}
-        toFahrenheit={toFahrenheit}
+        temperatureConverter={temperatureConverter}
+        city={weatherData.city}
         setRequestedCity={setRequestedCity}
       />
-      <WidgetBlock temp={temp} status={status} description={description} />
-      <InfoBlock weatherReport={weatherReport} />
+      <WidgetBlock weatherData={weatherData} />
+      <InfoBlock weatherData={weatherData} />
     </View>
   );
 };

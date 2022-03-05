@@ -2,25 +2,25 @@ import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import InfoCol from './InfoCol';
 
-const InfoBlock = ({weatherReport}) => {
+const InfoBlock = ({weatherData}) => {
   const windDataset = {
     title: 'Wind',
-    value: weatherReport.wind,
+    value: weatherData.wind,
     scale: ' m/s, West',
   };
   const humidityDataset = {
     title: 'Humidity',
-    value: weatherReport.humidity,
+    value: weatherData.humidity,
     scale: '%',
   };
   const pressureDataset = {
     title: 'Pressure',
-    value: weatherReport.pressure,
+    value: weatherData.pressure,
     scale: ' mm Hg',
   };
   const rainProbDataset = {
     title: 'Rain Probality',
-    value: weatherReport.rainProb,
+    value: weatherData.rainProb,
     scale: '%',
   };
 

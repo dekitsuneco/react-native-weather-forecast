@@ -1,15 +1,15 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 
-const TempSwitch = ({toCelcius, toFahrenheit}) => {
+const TempSwitch = ({temperatureConverter}) => {
   const [isCelcius, setIsCelcius] = useState(true);
 
   const handleTempPress = () => {
     setIsCelcius(!isCelcius);
     if (isCelcius) {
-      toCelcius();
+      temperatureConverter.toCelcius();
     } else {
-      toFahrenheit();
+      temperatureConverter.toFahrenheit();
     }
   };
 

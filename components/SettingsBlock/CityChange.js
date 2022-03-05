@@ -1,7 +1,7 @@
 import {StyleSheet, TextInput} from 'react-native';
 import React, {useState} from 'react';
 
-const CityChange = ({city, setCity, setIsChangingCity, setRequestedCity}) => {
+const CityChange = ({city, setIsChangingCity, setRequestedCity}) => {
   const [inputValue, setInputValue] = useState(city);
 
   const handleSubmit = () => {

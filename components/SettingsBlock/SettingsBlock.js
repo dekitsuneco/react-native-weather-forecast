@@ -3,13 +3,7 @@ import React, {useState} from 'react';
 import CityChange from './CityChange';
 import MenuChange from './MenuChange';
 
-const SettingsBlock = ({
-  city,
-  setCity,
-  toCelcius,
-  toFahrenheit,
-  setRequestedCity,
-}) => {
+const SettingsBlock = ({temperatureConverter, city, setRequestedCity}) => {
   const [isChangingCity, setIsChangingCity] = useState(true);
 
   return (
@@ -18,13 +12,11 @@ const SettingsBlock = ({
         <MenuChange
           city={city}
           setIsChangingCity={setIsChangingCity}
-          toCelcius={toCelcius}
-          toFahrenheit={toFahrenheit}
+          temperatureConverter={temperatureConverter}
         />
       ) : (
         <CityChange
           city={city}
-          setCity={setCity}
           setIsChangingCity={setIsChangingCity}
           setRequestedCity={setRequestedCity}
         />
