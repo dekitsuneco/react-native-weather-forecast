@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Alert, StyleSheet} from 'react-native';
+import {View, Alert, StyleSheet, ActivityIndicator} from 'react-native';
 import SettingsBlock from './components/SettingsBlock/SettingsBlock';
 import WidgetBlock from './components/WidgetBlock/WidgetBlock';
 import InfoBlock from './components/InfoBlock/InfoBlock';
@@ -9,6 +9,8 @@ const App = () => {
   const [weatherData, setWeatherData] = useState({});
 
   const [requestedCity, setRequestedCity] = useState('Moscow');
+
+  const [isLoading, setIsLoading] = useState(false);
 
   // Functions:
   const normalizeDataFromAPI = data => {
@@ -97,6 +99,8 @@ const App = () => {
 
     const fetchWeatherDataFromAPI = () => {
       const URL = `https://api.openweathermap.org/data/2.5/weather?q=${requestedCity}&appid=${API_KEY}`;
+
+      setIsLoading(true);
       fetch(URL)
         .then(res => res.json())
         .then(data => {
@@ -105,16 +109,16 @@ const App = () => {
           setWeatherData(normalizedWeatherData);
 
           //!DEBUGGING
-          console.group();
+          /*console.group();
           console.log(Date.now().toLocaleString());
           console.dir(normalizedWeatherData);
           console.log(data.name);
-          console.groupEnd();
+          console.groupEnd();*/
           //!DEBUGGING
         })
         .catch(err => {
           //!DEBUGGING
-          console.error(err);
+          //console.error(err);
           //!DEBUGGING
           if (err.message === 'Invalid data') {
             Alert.alert(
@@ -141,6 +145,9 @@ const App = () => {
               {cancelable: true},
             );
           }
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
     };
 
@@ -153,13 +160,21 @@ const App = () => {
 
   return (
     <View style={styles.root}>
-      <SettingsBlock
-        temperatureConverter={temperatureConverter}
-        city={weatherData.city}
-        setRequestedCity={setRequestedCity}
-      />
-      <WidgetBlock weatherData={weatherData} />
-      <InfoBlock weatherData={weatherData} />
+      {isLoading ? (
+        <View style={styles.loader}>
+          <ActivityIndicator size="large" />
+        </View>
+      ) : (
+        <>
+          <SettingsBlock
+            temperatureConverter={temperatureConverter}
+            city={weatherData.city}
+            setRequestedCity={setRequestedCity}
+          />
+          <WidgetBlock weatherData={weatherData} />
+          <InfoBlock weatherData={weatherData} />
+        </>
+      )}
     </View>
   );
 };
@@ -168,6 +183,11 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     backgroundColor: 'rgba(73, 140, 236, 1)',
+  },
+  loader: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
