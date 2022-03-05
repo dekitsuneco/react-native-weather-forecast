@@ -43,7 +43,7 @@ const App = () => {
           return 'rain';
         default:
           //TODO
-          return 'cloud';
+          return 'partly_cloudy';
       }
     };
 
