@@ -1,20 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, Alert, StyleSheet} from 'react-native';
 import SettingsBlock from './components/SettingsBlock/SettingsBlock';
 import WidgetBlock from './components/WidgetBlock/WidgetBlock';
 import InfoBlock from './components/InfoBlock/InfoBlock';
 
 const App = () => {
-  /*const weatherData = {
-    temperature: 20,
-    description: 'Mostly sunny',
-    status: 'sun',
-    wind: 5,
-    humidity: 60,
-    pressure: 752,
-    rainProb: 10,
-  };*/
-
   // States:
   const [weatherData, setWeatherData] = useState({});
 
@@ -59,36 +49,6 @@ const App = () => {
     };
   };
 
-  useEffect(() => {
-    const fetchWeatherDataFromAPI = () => {
-      const URL = `https://api.openweathermap.org/data/2.5/weather?q=${requestedCity}&appid=bce68de2a52a0351de2783eff7e40797`;
-      fetch(URL)
-        .then(res => res.json())
-        .then(data => {
-          const normalizedWeatherData = normalizeDataFromAPI(data);
-          setWeatherData(normalizedWeatherData);
-          //setTemp(weatherData.temperature);
-          //setCity(data.name);
-
-          //!DEBUGGING
-          console.log('________________________');
-          console.log(Date.now().toLocaleString());
-          //console.log(normalizedWeatherData);
-          console.log(data.name);
-          console.log('*************************');
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    };
-
-    fetchWeatherDataFromAPI();
-
-    /*return () => {
-      second;
-    };*/
-  }, [requestedCity]);
-
   const temperatureConverter = {
     toCelcius: () =>
       setWeatherData(prev => ({
@@ -101,21 +61,50 @@ const App = () => {
         temperature: Math.round((prev.temperature - 32) * (5 / 9)),
       })),
   };
-  /*const toCelcius = () => {
-    setWeatherData(prev => ({
-      ...prev,
-      temperature: Math.round(prev.temperature * (9 / 5) + 32),
-    }));
-  };
 
-  const toFahrenheit = () => {
-    setWeatherData(prev => ({
-      ...prev,
-      temperature: Math.round((prev.temperature - 32) * (5 / 9)),
-    }));
-  };*/
+  useEffect(() => {
+    const fetchWeatherDataFromAPI = () => {
+      const URL = `https://api.openweathermap.org/data/2.5/weather?q=${requestedCity}&appid=bce68de2a52a0351de2783eff7e40797`;
+      fetch(URL)
+        .then(res => res.json())
+        .then(data => {
+          const normalizedWeatherData = normalizeDataFromAPI(data);
 
-  //const {temperature, description, status, ...weatherReport} = weatherData;
+          setWeatherData(normalizedWeatherData);
+
+          //!DEBUGGING
+          console.log('________________________');
+          console.log(Date.now().toLocaleString());
+          //console.log(normalizedWeatherData);
+          console.log(data.name);
+          console.log('*************************');
+          //!DEBUGGING
+        })
+        .catch(err => {
+          //!DEBUGGING
+          console.log(err);
+          //!DEBUGGING
+
+          Alert.alert(
+            'Invalid city name',
+            'Please enter an existing city name',
+            [
+              {
+                text: 'Understood',
+                style: 'cancel',
+              },
+            ],
+            {cancelable: true},
+          );
+        });
+    };
+
+    fetchWeatherDataFromAPI();
+
+    /*return () => {
+      second;
+    };*/
+  }, [requestedCity]);
 
   return (
     <View style={styles.root}>
