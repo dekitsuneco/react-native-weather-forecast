@@ -3,7 +3,7 @@ import React from 'react';
 import InfoItem from './InfoItem';
 
 const InfoCol = ({datasets}) => {
-  console.log(datasets);
+  //console.log(datasets);
   return (
     <View style={styles.infoCol}>
       {datasets.map((dataset, index) => (

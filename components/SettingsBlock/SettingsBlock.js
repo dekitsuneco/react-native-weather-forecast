@@ -3,7 +3,13 @@ import React, {useState} from 'react';
 import CityChange from './CityChange';
 import MenuChange from './MenuChange';
 
-const SettingsBlock = ({city, setCity, toCelcius, toFahrenheit}) => {
+const SettingsBlock = ({
+  city,
+  setCity,
+  toCelcius,
+  toFahrenheit,
+  setRequestedCity,
+}) => {
   const [isChangingCity, setIsChangingCity] = useState(true);
 
   return (
@@ -20,6 +26,7 @@ const SettingsBlock = ({city, setCity, toCelcius, toFahrenheit}) => {
           city={city}
           setCity={setCity}
           setIsChangingCity={setIsChangingCity}
+          setRequestedCity={setRequestedCity}
         />
       )}
     </View>
