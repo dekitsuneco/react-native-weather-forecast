@@ -12,14 +12,45 @@ const App = () => {
 
   // Functions:
   const normalizeDataFromAPI = data => {
-    const normalizeTemp = temperature => Math.round(temperature - 273.15);
-    const normalizeWind = wind => Math.round(wind);
-    const normalizeHumidity = humidity => Math.round(humidity);
-    const normalizePressure = pressure => Math.round(pressure * 0.75006);
-    const normalizeRainProb = rainProb => Math.round(rainProb);
-    const normalizeDescription = description =>
-      description[0].toUpperCase() + description.substring(1);
+    const validateNumericData = value => {
+      if (isNaN(value) || value === null) {
+        console.log(value);
+        throw new Error('Invalid data');
+      }
+    };
+    const validateStringData = str => {
+      if (!str) {
+        throw new Error('Invalid data');
+      }
+    };
+
+    const normalizeTemp = temperature => {
+      validateNumericData(temperature);
+      return Math.round(temperature - 273.15);
+    };
+    const normalizeWind = wind => {
+      validateNumericData(wind);
+      return Math.round(wind);
+    };
+    const normalizeHumidity = humidity => {
+      validateNumericData(humidity);
+      return Math.round(humidity);
+    };
+    const normalizePressure = pressure => {
+      validateNumericData(pressure);
+      return Math.round(pressure * 0.75006);
+    };
+    const normalizeRainProb = rainProb => {
+      validateNumericData(rainProb);
+      return Math.round(rainProb);
+    };
+    const normalizeDescription = description => {
+      validateStringData(description);
+      return description[0].toUpperCase() + description.substring(1);
+    };
     const normalizeStatus = status => {
+      validateStringData(status);
+
       switch (status) {
         case 'Thunderstorm':
           return 'storm';
@@ -84,18 +115,31 @@ const App = () => {
           //!DEBUGGING
           console.log(err);
           //!DEBUGGING
-
-          Alert.alert(
-            'Invalid city name',
-            'Please enter an existing city name',
-            [
-              {
-                text: 'Understood',
-                style: 'cancel',
-              },
-            ],
-            {cancelable: true},
-          );
+          if (err.message === 'Invalid data') {
+            Alert.alert(
+              'External error',
+              "Sorry, we can't get weather forecast for the city. Please. try again later",
+              [
+                {
+                  text: 'Understood',
+                  style: 'cancel',
+                },
+              ],
+              {cancelable: true},
+            );
+          } else {
+            Alert.alert(
+              'Invalid city name',
+              'Please enter an existing city name',
+              [
+                {
+                  text: 'Understood',
+                  style: 'cancel',
+                },
+              ],
+              {cancelable: true},
+            );
+          }
         });
     };
 
