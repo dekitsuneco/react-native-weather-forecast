@@ -14,7 +14,6 @@ const App = () => {
   const normalizeDataFromAPI = data => {
     const validateNumericData = value => {
       if (isNaN(value) || value === null) {
-        console.log(value);
         throw new Error('Invalid data');
       }
     };
@@ -94,8 +93,10 @@ const App = () => {
   };
 
   useEffect(() => {
+    const API_KEY = 'bce68de2a52a0351de2783eff7e40797';
+
     const fetchWeatherDataFromAPI = () => {
-      const URL = `https://api.openweathermap.org/data/2.5/weather?q=${requestedCity}&appid=bce68de2a52a0351de2783eff7e40797`;
+      const URL = `https://api.openweathermap.org/data/2.5/weather?q=${requestedCity}&appid=${API_KEY}`;
       fetch(URL)
         .then(res => res.json())
         .then(data => {
@@ -104,16 +105,16 @@ const App = () => {
           setWeatherData(normalizedWeatherData);
 
           //!DEBUGGING
-          console.log('________________________');
+          console.group();
           console.log(Date.now().toLocaleString());
-          //console.log(normalizedWeatherData);
+          console.dir(normalizedWeatherData);
           console.log(data.name);
-          console.log('*************************');
+          console.groupEnd();
           //!DEBUGGING
         })
         .catch(err => {
           //!DEBUGGING
-          console.log(err);
+          console.error(err);
           //!DEBUGGING
           if (err.message === 'Invalid data') {
             Alert.alert(

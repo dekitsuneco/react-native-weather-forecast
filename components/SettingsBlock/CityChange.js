@@ -5,10 +5,8 @@ const CityChange = ({city, setIsChangingCity, setRequestedCity}) => {
   const [inputValue, setInputValue] = useState(city);
 
   const handleSubmit = () => {
-    //console.log(inputValue);
-    //setCity(inputValue);
-    setRequestedCity(inputValue);
     setIsChangingCity(true);
+    setRequestedCity(inputValue);
   };
 
   return (
