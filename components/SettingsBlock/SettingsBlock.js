@@ -1,25 +1,20 @@
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import TempSwitch from './TempSwitch';
+import CityChange from './CityChange';
 
 const SettingsBlock = ({city, setCity, setTemp, toCelcius, toFahrenheit}) => {
   // States:
   const [isChangingCity, setIsChangingCity] = useState(true);
-  const [inputValue, setInputValue] = useState('');
+  //const [inputValue, setInputValue] = useState('');
 
   //const [isCelcius, setIsCelcius] = useState(true);
 
   // Event handlers:
-  const handleSubmit = () => {
+  /*const handleSubmit = () => {
     setCity(inputValue);
     setIsChangingCity(true);
-  };
+  };*/
 
   const handleCityPress = () => {
     setIsChangingCity(false);
@@ -66,7 +61,7 @@ const SettingsBlock = ({city, setCity, setTemp, toCelcius, toFahrenheit}) => {
     <TempSwitch toCelcius={toCelcius} toFahrenheit={toFahrenheit} />
   );
 
-  const cityChange = (
+  /*const cityChange = (
     <TextInput
       style={styles.cityChange}
       placeholder="Type city.."
@@ -75,6 +70,13 @@ const SettingsBlock = ({city, setCity, setTemp, toCelcius, toFahrenheit}) => {
       value={inputValue}
       onChangeText={textValue => setInputValue(textValue)}
       onSubmitEditing={handleSubmit}
+    />
+  );*/
+  const cityChange = (
+    <CityChange
+      city={city}
+      setCity={setCity}
+      setIsChangingCity={setIsChangingCity}
     />
   );
 
@@ -116,13 +118,13 @@ const SettingsBlock = ({city, setCity, setTemp, toCelcius, toFahrenheit}) => {
 export default SettingsBlock;
 
 const styles = StyleSheet.create({
-  cityChange: {
+  /*cityChange: {
     padding: 17,
     backgroundColor: 'white',
     color: 'black',
     fontSize: 15,
     borderRadius: 4,
-  },
+  },*/
   settingsBlock: {
     marginTop: 19,
     marginHorizontal: 19,
