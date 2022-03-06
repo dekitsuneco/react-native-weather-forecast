@@ -5,13 +5,18 @@ import LocationRow from './LocationRow';
 
 const MenuChange = ({
   city,
+  scale,
   setIsChangingCity,
   temperatureConverter,
   setRequestParams,
 }) => {
   return (
     <View styles={styles.menuChange}>
-      <TitleRow city={city} temperatureConverter={temperatureConverter} />
+      <TitleRow
+        city={city}
+        scale={scale}
+        temperatureConverter={temperatureConverter}
+      />
       <LocationRow
         setIsChangingCity={setIsChangingCity}
         setRequestParams={setRequestParams}

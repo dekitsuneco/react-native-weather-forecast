@@ -1,26 +1,39 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 
-const TempSwitch = ({temperatureConverter}) => {
-  const [isCelcius, setIsCelcius] = useState(true);
+const TempSwitch = ({temperatureConverter, scale}) => {
+  console.log('Scale is ' + scale);
+  //const [isCelcius, setIsCelcius] = useState(true);
 
   const handleTempPress = () => {
-    setIsCelcius(!isCelcius);
-    if (isCelcius) {
-      temperatureConverter.toCelcius();
-    } else {
-      temperatureConverter.toFahrenheit();
+    switch (scale) {
+      case 'C':
+        temperatureConverter.toFahrenheit();
+        break;
+      case 'F':
+        temperatureConverter.toCelcius();
+        break;
     }
   };
 
   const activeCelcius = (
     <View style={styles.tempSwitch}>
-      <TouchableOpacity onPress={handleTempPress}>
+      <TouchableOpacity
+        onPress={() => {
+          if (scale !== 'C') {
+            handleTempPress();
+          }
+        }}>
         <View style={{...styles.tempCelsius, ...styles.tempActive}}>
           <Text style={styles.active}>C</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={handleTempPress}>
+      <TouchableOpacity
+        onPress={() => {
+          if (scale !== 'F') {
+            handleTempPress();
+          }
+        }}>
         <View style={{...styles.tempFahrenheit, ...styles.tempDisabled}}>
           <Text style={styles.disabled}>F</Text>
         </View>
@@ -30,12 +43,22 @@ const TempSwitch = ({temperatureConverter}) => {
 
   const activeFahrenheit = (
     <View style={styles.tempSwitch}>
-      <TouchableOpacity onPress={handleTempPress}>
+      <TouchableOpacity
+        onPress={() => {
+          if (scale !== 'C') {
+            handleTempPress();
+          }
+        }}>
         <View style={{...styles.tempCelsius, ...styles.tempDisabled}}>
           <Text style={styles.disabled}>C</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={handleTempPress}>
+      <TouchableOpacity
+        onPress={() => {
+          if (scale !== 'F') {
+            handleTempPress();
+          }
+        }}>
         <View style={{...styles.tempFahrenheit, ...styles.tempActive}}>
           <Text style={styles.active}>F</Text>
         </View>
@@ -43,7 +66,7 @@ const TempSwitch = ({temperatureConverter}) => {
     </View>
   );
 
-  return isCelcius ? activeCelcius : activeFahrenheit;
+  return scale === 'C' ? activeCelcius : activeFahrenheit;
 };
 
 export default TempSwitch;

@@ -6,8 +6,9 @@ import WidgetBlock from './components/WidgetBlock/WidgetBlock';
 import InfoBlock from './components/InfoBlock/InfoBlock';
 
 const App = () => {
+  console.log('App');
   // States:
-  const [weatherData, setWeatherData] = useState({});
+  const [weatherData, setWeatherData] = useState({scale: 'C'});
 
   const [requestParams, setRequestParams] = useState({
     byCity: false,
@@ -90,11 +91,13 @@ const App = () => {
       setWeatherData(prev => ({
         ...prev,
         temperature: Math.round(prev.temperature * (9 / 5) + 32),
+        scale: 'C',
       })),
     toFahrenheit: () =>
       setWeatherData(prev => ({
         ...prev,
         temperature: Math.round((prev.temperature - 32) * (5 / 9)),
+        scale: 'F',
       })),
   };
 
@@ -113,20 +116,18 @@ const App = () => {
         .then(data => {
           const normalizedWeatherData = normalizeDataFromAPI(data);
 
-          setWeatherData(normalizedWeatherData);
-
-          //!DEBUGGING
-          /*console.group();
-          console.log(Date.now().toLocaleString());
-          console.dir(normalizedWeatherData);
-          console.log(data.name);
-          console.groupEnd();*/
-          //!DEBUGGING
+          setWeatherData(prev => ({
+            ...normalizedWeatherData,
+            scale: prev.scale,
+            temperature:
+              prev.scale === 'C'
+                ? normalizedWeatherData.temperature
+                : Math.round(
+                    (normalizedWeatherData.temperature - 32) * (5 / 9),
+                  ),
+          }));
         })
         .catch(err => {
-          //!DEBUGGING
-          //console.error(err);
-          //!DEBUGGING
           if (err.message === 'Invalid data') {
             Alert.alert(
               'External error',
@@ -207,6 +208,7 @@ const App = () => {
           <SettingsBlock
             temperatureConverter={temperatureConverter}
             city={weatherData.city}
+            scale={weatherData.scale}
             setRequestParams={setRequestParams}
           />
           <WidgetBlock weatherData={weatherData} />

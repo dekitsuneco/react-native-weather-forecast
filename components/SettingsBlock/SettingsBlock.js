@@ -3,7 +3,12 @@ import React, {useState} from 'react';
 import CityChange from './CityChange';
 import MenuChange from './MenuChange';
 
-const SettingsBlock = ({temperatureConverter, city, setRequestParams}) => {
+const SettingsBlock = ({
+  temperatureConverter,
+  city,
+  scale,
+  setRequestParams,
+}) => {
   const [isChangingCity, setIsChangingCity] = useState(true);
 
   return (
@@ -11,6 +16,7 @@ const SettingsBlock = ({temperatureConverter, city, setRequestParams}) => {
       {isChangingCity ? (
         <MenuChange
           city={city}
+          scale={scale}
           setIsChangingCity={setIsChangingCity}
           temperatureConverter={temperatureConverter}
           setRequestParams={setRequestParams}

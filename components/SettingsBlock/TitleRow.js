@@ -2,7 +2,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import TempSwitch from './TempSwitch';
 
-const TitleRow = ({city, temperatureConverter}) => {
+const TitleRow = ({city, scale, temperatureConverter}) => {
   return (
     <View style={styles.titleRow}>
       <View style={styles.cityTitle}>
@@ -12,7 +12,7 @@ const TitleRow = ({city, temperatureConverter}) => {
         <View style={styles.tempSign}>
           <Text style={styles.sign}>º</Text>
         </View>
-        <TempSwitch temperatureConverter={temperatureConverter} />
+        <TempSwitch temperatureConverter={temperatureConverter} scale={scale} />
       </View>
     </View>
   );
