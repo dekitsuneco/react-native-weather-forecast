@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import Geolocation from '@react-native-community/geolocation';
 import {View, Alert, StyleSheet, ActivityIndicator} from 'react-native';
 import SettingsBlock from './components/SettingsBlock/SettingsBlock';
 import WidgetBlock from './components/WidgetBlock/WidgetBlock';
@@ -8,7 +9,10 @@ const App = () => {
   // States:
   const [weatherData, setWeatherData] = useState({});
 
-  const [requestedCity, setRequestedCity] = useState('Moscow');
+  const [requestedCity, setRequestedCity] = useState('London');
+
+  const [isRequestingCurrentLocation, setIsRequestingCurrentLocation] =
+    useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -95,10 +99,36 @@ const App = () => {
   };
 
   useEffect(() => {
-    const API_KEY = 'bce68de2a52a0351de2783eff7e40797';
+    //!TEST
+    const API = {
+      KEY: 'bce68de2a52a0351de2783eff7e40797',
+      URL: '',
+    };
+    //!TEST
 
-    const fetchWeatherDataFromAPI = () => {
-      const URL = `https://api.openweathermap.org/data/2.5/weather?q=${requestedCity}&appid=${API_KEY}`;
+    /*const API_SETTINGS = {
+      API_KEY: 'bce68de2a52a0351de2783eff7e40797',
+      URL: '',
+    };
+
+    if (isRequestingCurrentLocation) {
+
+      console.info('--------------------------------');
+      Geolocation.getCurrentPosition(
+        info => console.log(info),
+        err => console.error(err),
+        {enableHighAccuracy: true, timeout: 25000, maximumAge: 3600000},
+      );
+      console.info('******************************');
+      //*
+
+      API_SETTINGS.URL = `https://api.openweathermap.org/data/2.5/weather?q=${requestedCity}&appid=${API_SETTINGS.API_KEY}`;
+    } else {
+      API_SETTINGS.URL = `https://api.openweathermap.org/data/2.5/weather?q=${requestedCity}&appid=${API_SETTINGS.API_KEY}`;
+    }*/
+
+    const fetchWeatherDataFromAPI = URL => {
+      //const URL = `https://api.openweathermap.org/data/2.5/weather?q=${requestedCity}&appid=${API_SETTINGS.API_KEY}`;
 
       setIsLoading(true);
       fetch(URL)
@@ -151,12 +181,37 @@ const App = () => {
         });
     };
 
-    fetchWeatherDataFromAPI();
+    //!TEST
+    if (isRequestingCurrentLocation) {
+      console.log('TRUE');
+      Geolocation.getCurrentPosition(
+        info => {
+          console.log(info);
+
+          setIsRequestingCurrentLocation(false);
+          const {coords} = info;
+          const {latitude, longitude} = coords;
+          API.URL = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API.KEY}`;
+
+          fetchWeatherDataFromAPI(API.URL);
+        },
+        err => console.error(err),
+        {enableHighAccuracy: true, timeout: 25000, maximumAge: 3600000},
+      );
+    } else {
+      console.log('FALSE');
+      API.URL = `https://api.openweathermap.org/data/2.5/weather?q=${requestedCity}&appid=${API.KEY}`;
+
+      fetchWeatherDataFromAPI(API.URL);
+    }
+    //!TEST
+
+    //fetchWeatherDataFromAPI();
 
     /*return () => {
       second;
     };*/
-  }, [requestedCity]);
+  }, [requestedCity, isRequestingCurrentLocation]);
 
   return (
     <View style={styles.root}>
@@ -170,6 +225,7 @@ const App = () => {
             temperatureConverter={temperatureConverter}
             city={weatherData.city}
             setRequestedCity={setRequestedCity}
+            setIsRequestingCurrentLocation={setIsRequestingCurrentLocation}
           />
           <WidgetBlock weatherData={weatherData} />
           <InfoBlock weatherData={weatherData} />
@@ -183,6 +239,7 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     backgroundColor: 'rgba(73, 140, 236, 1)',
+    //backgroundColor: 'red',
   },
   loader: {
     flex: 1,

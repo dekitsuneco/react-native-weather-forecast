@@ -1,9 +1,13 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-const LocationRow = ({setIsChangingCity}) => {
+const LocationRow = ({setIsChangingCity, setIsRequestingCurrentLocation}) => {
   const handleCityPress = () => {
     setIsChangingCity(false);
+  };
+
+  const handleLocationCurrentPress = () => {
+    setIsRequestingCurrentLocation(true);
   };
 
   return (
@@ -14,7 +18,7 @@ const LocationRow = ({setIsChangingCity}) => {
         </TouchableOpacity>
       </View>
       <View style={styles.setLocationCurrent}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleLocationCurrentPress}>
           <Text style={styles.locationCurrent}>🔺 Current location</Text>
         </TouchableOpacity>
       </View>
