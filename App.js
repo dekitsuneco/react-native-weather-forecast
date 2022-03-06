@@ -178,7 +178,19 @@ const App = () => {
 
           fetchWeatherDataFromAPI(API.URL);
         },
-        err => console.error(err),
+        () => {
+          Alert.alert(
+            'External error',
+            "Sorry, we can't get weather forecast for the city. Please. try again later",
+            [
+              {
+                text: 'Understood',
+                style: 'cancel',
+              },
+            ],
+            {cancelable: true},
+          );
+        },
         {enableHighAccuracy: true, timeout: 25000, maximumAge: 3600000},
       );
     }
