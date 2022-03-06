@@ -10,7 +10,7 @@ const App = () => {
   const [weatherData, setWeatherData] = useState({});
 
   const [requestParams, setRequestParams] = useState({
-    byCity: true,
+    byCity: false,
     requestedCity: 'Nara',
   });
 
