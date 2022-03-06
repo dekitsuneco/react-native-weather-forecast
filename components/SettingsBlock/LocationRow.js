@@ -1,13 +1,13 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-const LocationRow = ({setIsChangingCity, setIsRequestingCurrentLocation}) => {
+const LocationRow = ({setIsChangingCity, setRequestParams}) => {
   const handleCityPress = () => {
     setIsChangingCity(false);
   };
 
   const handleLocationCurrentPress = () => {
-    setIsRequestingCurrentLocation(true);
+    setRequestParams(prev => ({...prev, byCity: false}));
   };
 
   return (

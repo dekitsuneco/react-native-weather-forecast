@@ -7,14 +7,14 @@ const MenuChange = ({
   city,
   setIsChangingCity,
   temperatureConverter,
-  setIsRequestingCurrentLocation,
+  setRequestParams,
 }) => {
   return (
     <View styles={styles.menuChange}>
       <TitleRow city={city} temperatureConverter={temperatureConverter} />
       <LocationRow
         setIsChangingCity={setIsChangingCity}
-        setIsRequestingCurrentLocation={setIsRequestingCurrentLocation}
+        setRequestParams={setRequestParams}
       />
     </View>
   );
