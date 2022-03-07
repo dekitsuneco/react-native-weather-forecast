@@ -37,7 +37,7 @@ export default SettingsBlock;
 const styles = StyleSheet.create({
   settingsBlock: {
     marginTop: 19,
-    marginHorizontal: 19,
     marginBottom: 10,
+    marginHorizontal: 19,
   },
 });

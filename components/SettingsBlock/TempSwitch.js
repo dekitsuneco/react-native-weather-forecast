@@ -2,9 +2,6 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 
 const TempSwitch = ({temperatureConverter, scale}) => {
-  console.log('Scale is ' + scale);
-  //const [isCelcius, setIsCelcius] = useState(true);
-
   const handleTempPress = () => {
     switch (scale) {
       case 'C':
@@ -75,8 +72,8 @@ const styles = StyleSheet.create({
   tempSwitch: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, .4)',
+    borderWidth: 1,
     borderRadius: 8,
   },
   tempCelsius: {

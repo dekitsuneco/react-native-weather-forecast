@@ -2,21 +2,6 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
 
 const WidgetBlock = ({weatherData}) => {
-  /*const iconSet = {
-    cloud: '☁',
-    rain: '🌧',
-    storm: '🌩',
-    partly_cloudly: '⛅',
-    sun: '🌞',
-  };*/
-  /*const iconSet = {
-    cloud: './assets/img/cloud.png',
-    rain: './assets/img/rain.png',
-    storm: './assets/img/storm.png',
-    partly_cloudly: './assets/img/partly cloudly.png',
-    sun: './assets/img/sun.png',
-  };*/
-  /*          <Text style={styles.icon}>{iconSet[status]}</Text>*/
   const icons = {
     cloud: require('./assets/img/cloud.png'),
     rain: require('./assets/img/rain.png'),

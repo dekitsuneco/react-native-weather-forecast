@@ -12,7 +12,7 @@ const App = () => {
 
   const [requestParams, setRequestParams] = useState({
     byCity: false,
-    requestedCity: 'Nara',
+    requestedCity: 'Moscow',
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -69,8 +69,7 @@ const App = () => {
         case 'Snow': //TODO
           return 'rain';
         default:
-          //TODO
-          return 'partly_cloudy';
+          return 'partly_cloudy'; //TODO
       }
     };
 
@@ -102,8 +101,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    console.log('was called');
-
     const API = {
       KEY: 'bce68de2a52a0351de2783eff7e40797',
       URL: '',
@@ -160,8 +157,6 @@ const App = () => {
     };
 
     if (requestParams.byCity) {
-      console.log('Requesting by city..');
-
       const {requestedCity: city} = requestParams;
       API.URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API.KEY}`;
 
@@ -171,8 +166,6 @@ const App = () => {
 
       Geolocation.getCurrentPosition(
         info => {
-          console.log(info);
-
           const {coords} = info;
           const {latitude, longitude} = coords;
           API.URL = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API.KEY}`;
