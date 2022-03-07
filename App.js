@@ -161,8 +161,6 @@ const App = () => {
 
       fetchWeatherDataFromAPI(API.URL);
     } else {
-      console.log('Requesting current location..');
-
       Geolocation.getCurrentPosition(
         info => {
           const {coords} = info;
