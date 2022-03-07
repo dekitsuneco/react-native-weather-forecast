@@ -6,7 +6,6 @@ import WidgetBlock from './components/WidgetBlock/WidgetBlock';
 import InfoBlock from './components/InfoBlock/InfoBlock';
 
 const App = () => {
-  console.log('App');
   // States:
   const [weatherData, setWeatherData] = useState({scale: 'C'});
 
